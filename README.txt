@@ -1,6 +1,8 @@
 # OpenSSLOcsp
 Short description:
-These files contains modified code for OpenSSl Ocsp acting as responder (aka server) using OpenSSL text index file as DB for storing Root certificate, responder key and responder certificate for each issued certificate at the index file.
+These files contains modified code for OpenSSl Ocsp acting as responder (aka server) 
+using OpenSSL text index file as DB for storing Root certificate, responder key and responder certificate 
+for each issued certificate at the index file.
 It are intended all for OpenSSL 1.0.2d official released version only !
 There are 3 modified files:
 - apps.h
@@ -91,13 +93,20 @@ at "-ocspdbscert" switch also.
 
 
 Examples:
+launch OSSL as responder at "current" mode (as it was) :
+
+
+
+
+
 
 Some tech details:
 Function init_responder was taken by me from middle November of 2015 Git version 
 due to 1.0.2 released version released port for a quiet long time (up to 45 seconds) 
 and was not be able to reuse it (not reuse socket) .
 
-Tested with Strongswan 5.3.3/5.3.5 with 2 certificate at server: 
+Tested with Strongswan 5.3.3/5.3.5 with 2 certificate at server: exact server certificate and
+its Intermediate one (from Root -> Inter -> Server, all issued of OSSL) at Ubuntu 14.04 LTS.
 
-Some optimization may be required.
+Some optimization of code may be required.
 
