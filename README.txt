@@ -138,10 +138,8 @@ openssl ocsp -ocspdbsncert /path/server34.crt -index /path/IndexDB.txt -CA ""
 Note, that serial number as specified serial number or serial number extracted for specified 
 certificate have to be presented at index DB, otherwise, error will be appeared.
 
-<<<<<<< HEAD
 And there weren' t tests for updating index DB from old format to new (introduced format) with added 3 fields !
-=======
->>>>>>> 9991a74568624686f996d854a03b01c688e84a36
+
 
 
 Some tech details:
