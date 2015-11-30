@@ -93,8 +93,20 @@ at "-ocspdbscert" switch also.
 
 
 Examples:
-launch OSSL as responder at "current" mode (as it was) :
+launch OSSL as responder at "current" mode - as it was:
+openssl ocsp -index /path/IndexDB.txt -rsigner /path/RSign1.crt -rkey /path/RSign1.key 
+-CA /path/RootCA.crt -port 50000
+or
+openssl ocsp -index /psth/IndexDB.txt -rsigner /path/RSign1.crt -rkey /path/RSign1.key 
+-CA /path/RootCA.crt -reqin /path/some.req
 
+launch OSSL as responder at "new" mode - as from now (for this mode, workign with "-port" parmeter 
+is more preferable (optimal) then with "-reqin" :
+openssl ocsp -ocspdb -index /path/IndexDB.txt -port 50000
+or
+openssl ocsp -ocspdb -index /path/IndexDB.txt -reqin /path/some.req
+
+Add the trinity of Root certificate, responder certificte/key to Index DB:
 
 
 
