@@ -42,13 +42,19 @@ Also 2 new command line switches "-ocspdb" & "-ocspdbsncert" are added usign in 
 As following within this mod, there are 2 Ocsp working modes:
 - "command switcher" Ocsp responder mode - when "-CA" and/or "-rsigner" and/or "-rkey" switcher/s is/are used, of course with "-Index" without "-ocspdb" . In the case, OSSL will be started at Ocsp responder mode as at past using Root certificate and responder certificates/keys specified at mentioned parameters, that is Ocsp responder will get RootCA, responder key & certificate from specified files and will serve only request for one certificate. Let's call "current" mode.
 - "index DB" Ocsp responder mode - when "-ocspdb" is used, of course, with "-Index" , without "-CA" and/or "-rsigner" and/or "-rkey" switchers. In the case, OSSL will be started at Ocsp responder mode using index DB file, that is Ocsp responder will get RootCA, responder key & certificate from index DB file for appropriate certificate and will serve many requests for as many certificates as presented at DB and which are CAs, rsigner certificates & keys presented for. Let's call "new" mode.
+At the mode verified certificate 
+is searched at index text DB by serial 
+checking of existence and/or correcting specified Root certificate, responder certificate/key are carried out by serial number of requested certificate during getting Ocsp request.
 
 By default, /path/file of cerficate which is Root for issuing one is added to index text DB to RootCA field during issuing certificate.
 For other two parameters, that are for fields: responder key & certificate, "unknown" value is put at index text DB file.
 
 To add/change "Root certificate" and/or "Ocsp signer certificate" and/or "Ocsp signer" key to OSSL text index DB fields, appropriate parameter or parameters should be specified with "-ocspdbscert" switch within ocsp also.
 To delete, that is to clean one parameter up to all these parameters in OSSL text index DB, "-ocspdbscert" is inputed with non existing files or illegal s/n or with "" (double quotation marks without any symbol inside) at switches such as "-CA" and/or "-rsigner" and/or "-rkey" .
-In both cases, of course, serial of certificate or file of certificate in its own, which Root certificate, respononder certificate/key is added/cleared for, have to be specified at "-ocspdbscert" switch also.
+In both cases, of course, serial of certificate or file of certificate in its own, which Root certificate, responder certificate/key is added/cleared for, have to be specified at "-ocspdbscert" switch also.
+
+
+
 
 Function init_responder was taken by me from middle November of 2015 Git version due to 1.0.2 released version released port for a quiet long time (up to 45 seconds) and was not be able to reuse it.
 
