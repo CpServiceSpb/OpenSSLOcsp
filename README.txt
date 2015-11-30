@@ -106,9 +106,32 @@ openssl ocsp -ocspdb -index /path/IndexDB.txt -port 50000
 or
 openssl ocsp -ocspdb -index /path/IndexDB.txt -reqin /path/some.req
 
-Add the trinity of Root certificate, responder certificte/key to Index DB:
+Add the trinity of Root certificate, responder certificte/key to Index DB for certificate 
+with serila number 203 from DB:
+openssl ocsp -ocspdbsncert 203 -index /path/IndexDB.txt -rsigner -rsigner /path/RSign1.crt 
+-rkey /path/RSign1.key -CA /path/RootCA.crt
+or for certificate /path/server1.crt
+openssl ocsp -ocspdbsncert /path/server1.crt -index /path/IndexDB.txt -rsigner /path/RSign1.crt 
+-rkey /path/RSign1.key -CA /path/RootCA.crt
 
+Change, for example of responder key for certificate with serial number 4590,
+previously it was /path/RSign203.key at index DB:
+openssl ocsp -ocspdbsncert 4590 -index /path/IndexDB.txt -rkey /path/RSignNew.key
+or the same but for certificate of /path/server1.crt
+openssl ocsp -ocspdbsncert /path/server1.crt -index /path/IndexDB.txt -rkey /path/RSignNew.key
 
+Delete (clear) , for example, Root certtificate for certificate with serial number 10109,
+openssl ocsp -ocspdbsncert 10109 -index /path/IndexDB.txt -CA /path/RootC#$%.crt 
+(but file /path/RootC#$%.crt does not exist at /path)
+or 
+openssl ocsp -ocspdbsncert 10109 -index /path/IndexDB.txt -CA ""
+or the same for certificate /path/server34.crt
+openssl ocsp -ocspdbsncert /path/server34.crt -index /path/IndexDB.txt -CA /path/RootC#$%.crt 
+or
+openssl ocsp -ocspdbsncert /path/server34.crt -index /path/IndexDB.txt -CA ""
+
+Note, that serial number as specified serial number or serial number extracted for specified 
+certificate have to be presented at index DB, otherwise, error will be appeared.
 
 
 
@@ -122,3 +145,4 @@ its Intermediate one (from Root -> Inter -> Server, all issued of OSSL) at Ubunt
 
 Some optimization of code may be required.
 
+P. S. Also CGI (sh) script (tested at Ubuntu) is ready as Aoache2 site config allows to 
