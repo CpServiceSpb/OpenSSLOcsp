@@ -1,4 +1,5 @@
 # OpenSSLOcsp
+Short description:
 These files contains modified code for OpenSSl Ocsp acting as responder (aka server) using OpenSSL text index file as DB for storing Root certificate, responder key and responder certificate for each issued certificate at the index file.
 It are intended all for OpenSSL 1.0.2d official released version only !
 There are 3 modified files:
@@ -8,6 +9,7 @@ There are 3 modified files:
 All are located at OSSL folder/apps folder.
 And it is source code.
 
+Building/installation:
 These are fully coded files, not diffs, or patches.
 That is to implement this code to OpenSSL source code, you should:
 - download OpenSSL 1.0.2 released version from http://openssl.org/source/openssl-1.0.2d.tar.gz, for example
@@ -22,7 +24,7 @@ git clone https://github.com/CpServiceSpb/OpenSSLOcsp.git ocspmod
 - make test (if it is ncessary for you) ;
 - make install.
 
-
+Brief intro:
 The main difference of this OSSL Ocsp version that now OCSP responder may uses OSSL txt database !
 
 There are 3 new "fields" as new, added for each DB line that is for each Issued certificate: 
@@ -39,6 +41,7 @@ The 3 last fields are respectivelly:
 
 Also 2 new command line switches "-ocspdb" & "-ocspdbsncert" are added usign in conjuction with "ocsp" .
 
+Warning point:
 As following within this mod, there are 2 Ocsp working modes:
 - "command switcher" Ocsp responder mode - when "-CA" and/or "-rsigner" and/or "-rkey" switcher/s is/are used, 
 of course with "-Index" without "-ocspdb" . 
@@ -65,23 +68,36 @@ for each issued certificate have to be filled at index DB
 and OSSL Ocsp responder can handle Ocsp request/respond 
 for any certificate from index DB without reloading OSSL (if port is specified) .
 
-By default, /path/file of cerficate which is Root for issuing one is added to index text DB to RootCA field during issuing certificate.
-For other two parameters, that are for fields: responder key & certificate, "unknown" value is put at index text DB file.
+Operation with index text DB:
+First initialization:
+By default, /path/file of cerficate which is Root for issuing one is added 
+to index text DB to RootCA field during issuing certificate.
+For other two parameters, that are for fields: responder key & certificate, 
+"unknown" value is put at index text DB file.
 
+Followng corrections:
+Operation with index text DB:
 To add/change "Root certificate" and/or "Ocsp signer certificate" and/or "Ocsp signer" key 
 to OSSL text index DB fields, appropriate parameter or parameters should be specified 
 with "-ocspdbscert" switch within ocsp also.
 To delete, that is to clean one parameter up to all these parameters in OSSL text index DB, 
 "-ocspdbscert" is inputed with non existing files or illegal s/n or with "" (double quotation marks 
 without any symbol inside) at switches such as "-CA" and/or "-rsigner" and/or "-rkey" .
+"Cleaning" such parameter (Root certificate, and/or responder certificate/key) means
+setting up "unknown" value to respective index DB field.
 In both cases, of course, serial of certificate or file of certificate in its own, 
 which Root certificate, responder certificate/key is added/cleared for, have to be specified 
 at "-ocspdbscert" switch also.
 
 
+Examples:
 
+Some tech details:
+Function init_responder was taken by me from middle November of 2015 Git version 
+due to 1.0.2 released version released port for a quiet long time (up to 45 seconds) 
+and was not be able to reuse it (not reuse socket) .
 
-Function init_responder was taken by me from middle November of 2015 Git version due to 1.0.2 released version released port for a quiet long time (up to 45 seconds) and was not be able to reuse it.
+Tested with Strongswan 5.3.3/5.3.5 with 2 certificate at server: 
 
-
+Some optimization may be required.
 
