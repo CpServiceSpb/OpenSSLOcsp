@@ -23,7 +23,7 @@ git clone https://github.com/CpServiceSpb/OpenSSLOcsp.git ocspmod
 - make install.
 
 
-The main difference of this OSSL Ocsp version that now OCSP responder may uses OSSL txt database.
+The main difference of this OSSL Ocsp version that now OCSP responder may uses OSSL txt database !
 
 There are 3 new "fields" as new, added for each DB line that is for each Issued certificate: 
 /path/Root certificate <Tab> /path/Ocsp responder certificate <Tab> /path/Ocsp responder key
@@ -37,17 +37,13 @@ The 3 last fields are respectivelly:
 /path/Ocsp signer certificate - the same as -rsigner parameter;
 /path/Ocsp signer key - the same as -rkey parameter.
 
-
 Also 2 new command line switches "-ocspdb" & "-ocspdbsncert" are added usign in conjuction with "ocsp" .
 
-
-
-As following there are 2 Ocsp working modes:
-- "command switcher" Ocsp responder mode - when "-CA" and/or "-rsigner" and/or "-rkey" switcher/s is/are used, of course with "-Index" without "-ocspdb" . In the case, OSSL will be started at Ocsp responder mode as at past using certificates/keys specified at mentioned parameters, that is Ocsp responder will get RootCA, responder key & certificate from specified files and will serve only request for one certificate.
+As following within this mod, there are 2 Ocsp working modes:
+- "command switcher" Ocsp responder mode - when "-CA" and/or "-rsigner" and/or "-rkey" switcher/s is/are used, of course with "-Index" without "-ocspdb" . In the case, OSSL will be started at Ocsp responder mode as at past using Root certificate and responder certificates/keys specified at mentioned parameters, that is Ocsp responder will get RootCA, responder key & certificate from specified files and will serve only request for one certificate.
 - "index DB" Ocsp responder mode - when "-ocspdb" is used, of course, with "-Index" , without "-CA" and/or "-rsigner" and/or "-rkey" switchers. In the case, OSSL will be started at Ocsp responder mode using index DB file, that is Ocsp responder will get RootCA, responder key & certificate from index DB file for appropriate certificate and will serve many requests for as many certificates as presented at DB and which are CAs, rsigner certificates & keys presented for.
 
-
-By default, /path/file of cerficate which is Root for issuing one is added to index text DB to RootCA field (8th field) during issuing certificate.
+By default, /path/file of cerficate which is Root for issuing one is added to index text DB to RootCA field during issuing certificate.
 For other two parameters, that are for fields: responder key & certificate, "unknown" value is put at index text DB file.
 
 
