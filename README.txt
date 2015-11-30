@@ -91,6 +91,10 @@ In both cases, of course, serial of certificate or file of certificate in its ow
 which Root certificate, responder certificate/key is added/cleared for, have to be specified 
 at "-ocspdbscert" switch also.
 
+Index text DB with set/unset some of last fields looks like this:
+V	171125154741Z		202	unknown	/issuer of cert1 unknown	/path/Resp1.crt	/path/Resp1.key
+V	171125154742Z		203	unknown	/issuer of cert1 unknown	unknown	unknown
+
 
 Examples:
 launch OSSL as responder at "current" mode - as it was:
@@ -127,6 +131,7 @@ or
 openssl ocsp -ocspdbsncert 10109 -index /path/IndexDB.txt -CA ""
 or the same for certificate /path/server34.crt
 openssl ocsp -ocspdbsncert /path/server34.crt -index /path/IndexDB.txt -CA /path/RootC#$%.crt 
+(but file /path/RootC#$%.crt does not exist at /path)
 or
 openssl ocsp -ocspdbsncert /path/server34.crt -index /path/IndexDB.txt -CA ""
 
