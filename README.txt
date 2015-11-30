@@ -68,9 +68,15 @@ for any certificate from index DB without reloading OSSL (if port is specified) 
 By default, /path/file of cerficate which is Root for issuing one is added to index text DB to RootCA field during issuing certificate.
 For other two parameters, that are for fields: responder key & certificate, "unknown" value is put at index text DB file.
 
-To add/change "Root certificate" and/or "Ocsp signer certificate" and/or "Ocsp signer" key to OSSL text index DB fields, appropriate parameter or parameters should be specified with "-ocspdbscert" switch within ocsp also.
-To delete, that is to clean one parameter up to all these parameters in OSSL text index DB, "-ocspdbscert" is inputed with non existing files or illegal s/n or with "" (double quotation marks without any symbol inside) at switches such as "-CA" and/or "-rsigner" and/or "-rkey" .
-In both cases, of course, serial of certificate or file of certificate in its own, which Root certificate, responder certificate/key is added/cleared for, have to be specified at "-ocspdbscert" switch also.
+To add/change "Root certificate" and/or "Ocsp signer certificate" and/or "Ocsp signer" key 
+to OSSL text index DB fields, appropriate parameter or parameters should be specified 
+with "-ocspdbscert" switch within ocsp also.
+To delete, that is to clean one parameter up to all these parameters in OSSL text index DB, 
+"-ocspdbscert" is inputed with non existing files or illegal s/n or with "" (double quotation marks 
+without any symbol inside) at switches such as "-CA" and/or "-rsigner" and/or "-rkey" .
+In both cases, of course, serial of certificate or file of certificate in its own, 
+which Root certificate, responder certificate/key is added/cleared for, have to be specified 
+at "-ocspdbscert" switch also.
 
 
 
