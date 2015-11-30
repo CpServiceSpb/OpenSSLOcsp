@@ -40,11 +40,30 @@ The 3 last fields are respectivelly:
 Also 2 new command line switches "-ocspdb" & "-ocspdbsncert" are added usign in conjuction with "ocsp" .
 
 As following within this mod, there are 2 Ocsp working modes:
-- "command switcher" Ocsp responder mode - when "-CA" and/or "-rsigner" and/or "-rkey" switcher/s is/are used, of course with "-Index" without "-ocspdb" . In the case, OSSL will be started at Ocsp responder mode as at past using Root certificate and responder certificates/keys specified at mentioned parameters, that is Ocsp responder will get RootCA, responder key & certificate from specified files and will serve only request for one certificate. Let's call "current" mode.
-- "index DB" Ocsp responder mode - when "-ocspdb" is used, of course, with "-Index" , without "-CA" and/or "-rsigner" and/or "-rkey" switchers. In the case, OSSL will be started at Ocsp responder mode using index DB file, that is Ocsp responder will get RootCA, responder key & certificate from index DB file for appropriate certificate and will serve many requests for as many certificates as presented at DB and which are CAs, rsigner certificates & keys presented for. Let's call "new" mode.
-At the mode verified certificate 
-is searched at index text DB by serial 
-checking of existence and/or correcting specified Root certificate, responder certificate/key are carried out by serial number of requested certificate during getting Ocsp request.
+- "command switcher" Ocsp responder mode - when "-CA" and/or "-rsigner" and/or "-rkey" switcher/s is/are used, 
+of course with "-Index" without "-ocspdb" . 
+In the case, OSSL will be started at Ocsp responder mode as at past 
+using Root certificate and responder certificates/keys specified at mentioned parameters, 
+that is Ocsp responder will get RootCA, responder key & certificate from specified files 
+and will serve only request for one certificate. Let's call "current" mode.
+- "index DB" Ocsp responder mode - when "-ocspdb" is used, of course, 
+with "-Index" , without "-CA" and/or "-rsigner" and/or "-rkey" switchers. 
+In the case, OSSL will be started at Ocsp responder mode using index DB file, 
+that is Ocsp responder will get RootCA, responder key & certificate 
+from index DB file for appropriate certificate 
+and will serve many requests for as many certificates as presented at DB and 
+which are Root certificates, responder certificates/keys presented for. Let's call "new" mode.
+
+Determination of verifing certificate, if it exists or not at index DB, is carried out by serial number 
+of requested certificate during getting Ocsp request as at "current" mode.
+But then if necessary certificate exists at index DB, for making Ocsp respond (answer) , 
+Root certiicate, responder certificate/key at 3 last fields from index DB are used.
+There is not necessity to specify Root certiicate, responder certificate/key each time 
+you launch OSSL at Ocsp responder mode.
+Only once trinity of: Root certiicate, responder certificate/key 
+for each issued certificate have to be filled at index DB 
+and OSSL Ocsp responder can handle Ocsp request/respond 
+for any certificate from index DB without reloading OSSL (if port is specified) .
 
 By default, /path/file of cerficate which is Root for issuing one is added to index text DB to RootCA field during issuing certificate.
 For other two parameters, that are for fields: responder key & certificate, "unknown" value is put at index text DB file.
