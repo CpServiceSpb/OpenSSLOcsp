@@ -46,5 +46,15 @@ As following within this mod, there are 2 Ocsp working modes:
 By default, /path/file of cerficate which is Root for issuing one is added to index text DB to RootCA field during issuing certificate.
 For other two parameters, that are for fields: responder key & certificate, "unknown" value is put at index text DB file.
 
+To add/change "Root certificate" and/or "Ocsp signer certificate" and/or "Ocsp signer" key to OSSL text index Db fields, appropriate parameter or parameters should be specified with "-ocspdbscert" switch within ocsp also.
+
+
+
+To delete, that is to clean one parameter up to all these parameters in OSSL txt DB, "-ocspdb" is inputed with "empty" switches such as "-CA" and/or "-rsigner" and/or "-rkey" .
+
+In both cases, of course, serial of wishing certificate or file of certificate in its own have to be specified at -ocspdbsncert parameter also.
+
+Function init_responder was taken by me from middle November of 2015 Git version due to 1.0.2 released version released port for a quiet long time (up to 45 seconds) and was not be able to reuse it.
+
 
 
