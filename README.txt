@@ -29,11 +29,10 @@ There are 3 new "fields" as new, added for each DB line that is for each Issued 
 /path/Root certificate <Tab> /path/Ocsp responder certificate <Tab> /path/Ocsp responder key
 for each issuing certificate additionally to existing ones.
 Changed index text DB will be shown as following:
+V	171125154741Z		202	unknown	/issuer of cert1 /path/RootCA.crt	/path/Resp1.crt	/path/Resp1.key
+V	171125154742Z		203	unknown	/issuer of cert1 /path/RootCA.crt	/path/Resp2.crt	/path/Resp2.key
 
-
-
-
-Respectivelly: 
+The 3 last fields are respectivelly: 
 /path/Root certificate - the same as -CA parameter;
 /path/Ocsp signer certificate - the same as -rsigner parameter;
 /path/Ocsp signer key - the same as -rkey parameter.
