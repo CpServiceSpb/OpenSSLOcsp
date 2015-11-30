@@ -145,4 +145,6 @@ its Intermediate one (from Root -> Inter -> Server, all issued of OSSL) at Ubunt
 
 Some optimization of code may be required.
 
-P. S. Also CGI (sh) script (tested at Ubuntu) is ready as Aoache2 site config allows to 
+P. S. Also CGI (sh) script (tested at Ubuntu) is ready as Apache2 site config allows to accept Ocsp requests
+from clients, feeds it to OSSL at Ocsp responder (don' t matter at "current" or "new" mode) , takes back returned responce (answer) and send it to clients, make requests logging during it. Fow Windows (2008), such script is ready partially.
+Such script may be provided (by me) by e-mail requests.
